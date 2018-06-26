@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <atomic>
-#include <codecvt>
+//~ #include <codecvt>
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -63,9 +63,11 @@
     // https://connect.microsoft.com/VisualStudio/feedback/details/1403302/unresolved-external-when-using-codecvt-utf8
     typedef std::basic_string<__int32> i32string;
 
-    typedef i32string UTF32String;
+    //~ typedef i32string UTF32String;
+    typedef std::string UTF32String; //only need ASCII
   #else
-    typedef std::u32string UTF32String;
+    //~ typedef std::u32string UTF32String;
+    typedef std::string UTF32String; //only need ASCII
   #endif
 
   #ifdef ANTLR4CPP_EXPORTS
@@ -81,7 +83,8 @@
   class ANTLR4CPP_PUBLIC std::exception; // Needed for VS 2015.
 
 #elif defined(__APPLE__)
-  typedef std::u32string UTF32String;
+  //~typedef std::u32string UTF32String;
+  typedef std::string UTF32String; //only need ASCII
 
   #define GUID_CFUUID
   #if __GNUC__ >= 4
@@ -90,7 +93,8 @@
     #define ANTLR4CPP_PUBLIC
   #endif
 #else
-  typedef std::u32string UTF32String;
+  //~typedef std::u32string UTF32String;
+  typedef std::string UTF32String; //only need ASCII
 
   #define GUID_LIBUUID
   #if __GNUC__ >= 6

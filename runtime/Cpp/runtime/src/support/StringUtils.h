@@ -12,28 +12,32 @@ namespace antlrcpp {
   // For all conversions utf8 <-> utf32.
   // VS 2015 and VS 2017 have different bugs in std::codecvt_utf8<char32_t> (VS 2013 works fine).
 #if defined(_MSC_VER) && _MSC_VER >= 1900 && _MSC_VER < 2000
-  typedef std::wstring_convert<std::codecvt_utf8<__int32>, __int32> UTF32Converter;
+  //~ typedef std::wstring_convert<std::codecvt_utf8<__int32>, __int32> UTF32Converter;
 #else
-  typedef std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> UTF32Converter;
+  //~ typedef std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> UTF32Converter;
 #endif
   
   // The conversion functions fails in VS2017, so we explicitly use a workaround.
-  template<typename T>
-  inline std::string utf32_to_utf8(T const& data)
+  inline std::string utf32_to_utf8(const UTF32String& data)
   {
     // Don't make the converter static or we have to serialize access to it.
-    UTF32Converter converter;
+    //~ UTF32Converter converter;
 
     #if defined(_MSC_VER) && _MSC_VER >= 1900 && _MSC_VER < 2000
-      auto p = reinterpret_cast<const int32_t *>(data.data());
-      return converter.to_bytes(p, p + data.size());
+      //~ auto p = reinterpret_cast<const int32_t *>(data.data());
+      //~ return converter.to_bytes(p, p + data.size());
     #else
-      return converter.to_bytes(data);
+      std::string tmp = data;
+      return tmp;
+      //~ return converter.to_bytes(data);
     #endif
   }
 
   inline UTF32String utf8_to_utf32(const char* first, const char* last)
   {
+    (void)last;
+    //~
+    /*
     UTF32Converter converter;
 
     #if defined(_MSC_VER) && _MSC_VER >= 1900 && _MSC_VER < 2000
@@ -44,6 +48,8 @@ namespace antlrcpp {
     #endif
     
     return s;
+    */
+    return std::string(first); //~ should not be called
   }
 
   void replaceAll(std::string &str, std::string const& from, std::string const& to);

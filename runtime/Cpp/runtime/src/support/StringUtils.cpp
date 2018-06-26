@@ -20,16 +20,18 @@ void replaceAll(std::string& str, std::string const& from, std::string const& to
 }
 
 std::string ws2s(std::wstring const& wstr) {
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-  std::string narrow = converter.to_bytes(wstr);
+  //~ std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+  //~ std::string narrow = converter.to_bytes(wstr);
+  std::string narrow(wstr.begin(), wstr.end()); //truncating conversions should be fine for ASCII
 
   return narrow;
 }
 
 std::wstring s2ws(const std::string &str) {
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-  std::wstring wide = converter.from_bytes(str);
-  
+  //~ std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+  //~ std::wstring wide = converter.from_bytes(str);
+  std::wstring wide(str.begin(), str.end());
+
   return wide;
 }
 

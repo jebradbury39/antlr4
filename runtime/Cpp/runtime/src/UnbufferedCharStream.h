@@ -56,8 +56,10 @@ namespace antlr4 {
     i32string _data; // Custom type for VS 2015.
     typedef __int32 storage_type;
 #else
-    std::u32string _data;
-    typedef char32_t storage_type;
+    //~ std::u32string _data;
+    //~ typedef char32_t storage_type;
+    std::string _data;
+    typedef char storage_type;
 #endif
 
     /// <summary>

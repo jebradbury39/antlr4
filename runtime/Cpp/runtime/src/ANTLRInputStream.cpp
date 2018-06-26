@@ -33,11 +33,15 @@ ANTLRInputStream::ANTLRInputStream(std::istream &stream) {
 
 void ANTLRInputStream::load(const std::string &input) {
   // Remove the UTF-8 BOM if present.
+  //~
+  /*
   const char bom[4] = "\xef\xbb\xbf";
   if (input.compare(0, 3, bom, 3) == 0)
     _data = antlrcpp::utf8_to_utf32(input.data() + 3, input.data() + input.size());
   else
     _data = antlrcpp::utf8_to_utf32(input.data(), input.data() + input.size());
+  */
+  _data = input; //~only for ASCII
   p = 0;
 }
 
